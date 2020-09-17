@@ -1,16 +1,42 @@
+import csv
 
-users = {"nuno":"chave"}
+with open('logs.csv', 'r') as csv_file:
+    csv_reader = csv.reader(csv_file)
+
+    
+
+
+users = {'nome:','nuno'}
+
+
 
 def login():
+    with open('logs.csv', 'r') as csv_file:
+        csv_reader = csv.reader(csv_file)
 
-    name = users.get(input('Utilizador:'))
-    if name != None:
-        senha = input('Password:')
-        if senha == name:
-            print('Pode entrar.')
-    else:
-        print('Nome de utilizador não registado.')
-        menu()
+        next(csv_reader)
+
+    #name = users.get(input('Utilizador:'))
+        name = input('utilizador:')
+        senha = input('senha:')
+        for line in csv_reader:
+             if name == line[0]:
+                print('a trabalhar')
+                #if senha == line[1]:
+                    #print('Pode entrar.')
+                #else:
+                    #print('senha errada')
+             else:
+                 print('nome de utilizador não registado')
+                 #menu()
+            
+   # if name != None:
+        #senha = input('Password:')
+       # if senha == name:
+        #    print('Pode entrar.')
+    #else:
+        #print('Nome de utilizador não registado.')
+       # menu()
 
 def register():
     registo = input('Introduza o nome de utilizador:')
