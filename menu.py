@@ -1,40 +1,68 @@
-import tkinter as tk
 from tkinter import *
-import os
 
-root = tk.Tk()
-canvas = tk.Canvas(root, height=100, width=300, bg="#263D42")
-canvas.pack()
+def register_user():
+    username_info = username.get()
+    password_info = password.get()
 
-frame = tk.Frame(root, bg="white")
-frame.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
+    file = open(username_info + ".txt", "w")
+    file.write(username_info + "\n")
+    file.write(password_info)
+    file.close()
 
+    username_entry.delete(0, END)
+    password_entry.delete(0, END)
 
-def pedir_pass():
-    frame.destroy()
-    frame2 = tk.Frame(root, bg="white")
-    frame2.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
-    legenda_pass = Label(frame2, text="Introduza a password")
-    legenda_pass.pack()
-    nome_pass = Entry(frame2, width=20)
-    nome_pass.pack()
-    nomeBotao = tk.Button(frame2, text="Ir", padx=10, pady=5, fg="white", bg="#263D42")
-    nomeBotao.pack()
+    Label(screen1, text = "Registado com sucesso", fg = "green", font= ("calibri", 11)).pack()
 
 
 
 
-def pedir_user():
 
-    legenda_user = Label(frame, text="Introduza o nome de utilizador")
-    legenda_user.pack()
+def register():
+    global screen1
+    screen1 = Toplevel(screen)
+    screen1.title("Registar")
+    screen1.geometry("350x200")
 
-    nome_user = Entry(frame, width=20)
-    nome_user.pack()
+    global username
+    global password 
+    global username_entry
+    global password_entry
+    username = StringVar()
+    password = StringVar()
 
-    nomeBotao = tk.Button(frame, text="Ir", padx=10, pady=5, fg="white", bg="#263D42", command=pedir_pass)
-    nomeBotao.pack()
+    Label(screen1, text="Introduza dados * ").pack()
+    Label(screen1, text="").pack()
+    Label(screen1, text="Username * ").pack()
+    username_entry = Entry(screen1, textvariable=username)
+    username_entry.pack()
+    Label(screen1, text = "Password * ").pack()
+    password_entry = Entry(screen1, textvariable=password)
+    password_entry.pack()
+    Label(screen1, text="").pack()
+    Button(screen1, text = "Register", width = "10", height="1", command = register_user).pack()
 
 
-pedir_user()
-root.mainloop()
+
+def login():
+    print("login começou")
+
+
+
+
+def menu():
+    global screen
+    screen = Tk()
+    screen.geometry("350x200")
+    screen.title("Login")
+    Label(text = "Faça o Login ou Registe-se", bg="grey", width= "350", height= "2", font = ("calibri", 13)).pack()
+    Label(text="").pack()
+    Button(text = "Login", height = "2", width="30", command = login).pack()
+    Label(text= "").pack()
+    Button(text = "Register", height = "2", width="30", command = register).pack()
+
+    screen.mainloop()
+
+
+
+menu()
